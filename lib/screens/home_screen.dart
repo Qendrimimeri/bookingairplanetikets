@@ -1,11 +1,16 @@
+import 'package:bookingtickets/screens/hotel_screen.dart';
 import 'package:bookingtickets/screens/ticket_view.dart';
 import 'package:bookingtickets/utilities/app_style.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+import '../utilities/app_info_list.dart';
+
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -78,11 +83,49 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
             ]),
           ),
           const Gap(15),
-          const TicketView()
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.only(left: 20),
+            child: Row(
+              children: ticketList
+                  .map((ticket) => TicketView(ticket: ticket))
+                  .toList(),
+            ),
+          ),
+          const Gap(25),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Hotels",
+                  style: Styles.headLineStyle2,
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Text(
+                    "View all",
+                    style:
+                        Styles.textStyle.copyWith(color: Styles.primaryColor),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Gap(15),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.only(left: 20),
+            child: Row(
+              children:
+                  hotelList.map((item) => HotelScreen(hotel: item)).toList(),
+            ),
+          ),
         ],
       ),
     );
